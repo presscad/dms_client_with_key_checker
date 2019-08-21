@@ -1,0 +1,18 @@
+// DMSstart.idl : DMSstart 的 IDL 源
+//
+
+// 此文件将由 MIDL 工具处理以
+// 产生类型库(DMSstart.tlb)和封送处理代码。
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(C1275C3A-0465-4AC2-8A08-FA094D8A88EE),
+	version(1.0),
+	helpstring("DMSstart 1.0 类型库")
+]
+library DMSstartLib
+{
+	importlib("stdole2.tlb");
+};

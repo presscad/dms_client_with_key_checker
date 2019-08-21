@@ -1,0 +1,42 @@
+# Microsoft Developer Studio Generated Dependency File, included by ChatServer.mak
+
+.\ChatServer.cpp : \
+	".\ChatServer.h"\
+	".\ChatServerDlg.h"\
+	".\ListenSocket.h"\
+	".\ServerSocket.h"\
+	".\StdAfx.h"\
+	
+
+.\ChatServer.rc : \
+	".\res\ChatServer.ico"\
+	".\res\ChatServer.rc2"\
+	
+
+.\ChatServerDlg.cpp : \
+	".\ChatServer.h"\
+	".\ChatServerDlg.h"\
+	".\ListenSocket.h"\
+	".\ServerSocket.h"\
+	".\StdAfx.h"\
+	
+
+.\ListenSocket.cpp : \
+	".\ChatServer.h"\
+	".\ChatServerDlg.h"\
+	".\ListenSocket.h"\
+	".\ServerSocket.h"\
+	".\StdAfx.h"\
+	
+
+.\ServerSocket.cpp : \
+	".\ChatServer.h"\
+	".\ChatServerDlg.h"\
+	".\ListenSocket.h"\
+	".\ServerSocket.h"\
+	".\StdAfx.h"\
+	
+
+.\StdAfx.cpp : \
+	".\StdAfx.h"\
+	

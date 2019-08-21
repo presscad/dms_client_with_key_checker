@@ -1,0 +1,18 @@
+// DmsClient.idl : DmsClient 的 IDL 源
+//
+
+// 此文件将由 MIDL 工具处理以
+// 产生类型库(DmsClient.tlb)和封送处理代码。
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(9A63C41A-1E02-4A36-9CD5-F47830225789),
+	version(1.0),
+	helpstring("DmsClient 1.0 类型库")
+]
+library DmsClientLib
+{
+	importlib("stdole2.tlb");
+};

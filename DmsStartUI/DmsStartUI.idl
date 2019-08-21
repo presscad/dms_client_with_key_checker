@@ -1,0 +1,18 @@
+// DmsStartUI.idl : DmsStartUI 的 IDL 源
+//
+
+// 此文件将由 MIDL 工具处理以
+// 产生类型库(DmsStartUI.tlb)和封送处理代码。
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(3A387F0D-401C-49F3-BBD3-9BDC3CE40358),
+	version(1.0),
+	helpstring("DmsStartUI 1.0 类型库")
+]
+library DmsStartUILib
+{
+	importlib("stdole2.tlb");
+};

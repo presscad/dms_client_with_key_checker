@@ -1,0 +1,247 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文(中华人民共和国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#include ""res\\DmsTestDlg.rc2""  // 非 Microsoft Visual C++ 编辑的资源\r\n"
+    "#include ""afxres.rc""     // 标准组件\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\DmsTestDlg.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 248, 96
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "关于 DmsClient"
+FONT 9, "宋体", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "DmsClient2.0.0 版",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2018",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "确定",IDOK,191,7,50,16,WS_GROUP
+    PUSHBUTTON      "申请许可",IDC_BUTTON1,48,67,50,14
+    PUSHBUTTON      "更新许可",IDC_BUTTON2,155,67,50,14
+    LTEXT           "静态",IDC_STATIC1,19,44,211,12
+END
+
+IDD_DMSTESTDLG_DIALOG DIALOGEX 0, 0, 351, 382
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "客户端监控初始设置"
+FONT 9, "宋体", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,19,359,50,16
+    PUSHBUTTON      "取消",IDCANCEL,82,359,50,16
+    CONTROL         "",IDC_IPADDRESS1,"SysIPAddress32",WS_TABSTOP,51,17,100,15
+    LTEXT           " 文件端口",IDC_STATIC,226,46,39,8
+    EDITTEXT        IDC_EDIT1,52,42,58,14,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "本机端口号",IDC_STATIC,14,46,32,8
+    EDITTEXT        IDC_EDIT2,265,42,58,14,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "服务器IP",IDC_STATIC,13,21,38,8
+    PUSHBUTTON      "连接",ID_WIZNEXT,161,18,50,14
+    PUSHBUTTON      "文件夹",IDC_BUTTON2,294,302,50,14
+    EDITTEXT        IDC_EDIT3,7,302,286,14,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "备份文件目录",IDC_STATIC,13,289,52,8
+    LISTBOX         IDC_LIST1,7,63,337,221,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "保存配置",IDC_BUTTON3,217,18,50,14
+    PUSHBUTTON      "清理列表",IDC_BUTTON1,293,286,50,14
+    LTEXT           " WEB端口",IDC_STATIC,117,46,39,8
+    EDITTEXT        IDC_EDIT4,157,42,58,14,ES_AUTOHSCROLL | ES_NUMBER
+    PUSHBUTTON      "关于",IDC_BUTTON4,143,361,50,14
+    CONTROL         "自动拷贝ACCESS数据库(调试用)",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,216,365,128,10
+    LTEXT           "非数据库文件冲突扩展名(如: .led)",IDC_STATIC,7,342,129,8
+    PUSHBUTTON      "初始化扫描",IDC_BUTTON5,273,18,50,14
+    EDITTEXT        IDC_EDIT6,156,320,188,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "文件",IDC_BUTTON6,197,286,50,14,NOT WS_VISIBLE
+    LTEXT           "数据库文件冲突扩展名(如: .mdb)",IDC_STATIC,7,323,126,8
+    EDITTEXT        IDC_EDIT5,155,341,189,14,ES_AUTOHSCROLL
+END
+
+IDD_SELECT_TIME_DIALOG DIALOGEX 0, 0, 273, 263
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "选择扫描开始时间"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,107,242,51,15
+    PUSHBUTTON      "取消",IDCANCEL,190,241,51,15
+    CONTROL         "",IDC_DATETIMEPICKER1,"SysDateTimePick32",DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP | 0x8,199,23,51,15
+    CONTROL         "",IDC_MONTHCALENDAR1,"SysMonthCal32",MCS_NOTODAY | MCS_NOTODAYCIRCLE | WS_TABSTOP,12,20,181,82
+    CONTROL         "所有文件",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,31,242,44,10
+    GROUPBOX        "开始时间",IDC_STATIC,7,7,251,100
+    GROUPBOX        "结束时间",IDC_STATIC,7,114,259,119
+    CONTROL         "",IDC_MONTHCALENDAR2,"SysMonthCal32",MCS_NOTODAY | MCS_NOTODAYCIRCLE | WS_TABSTOP,11,129,181,82
+    CONTROL         "",IDC_DATETIMEPICKER2,"SysDateTimePick32",DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP | 0x8,197,132,51,15
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 0,0,0,0
+ PRODUCTVERSION 0,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080403a8"
+        BEGIN
+            VALUE "CompanyName", "嘉和天下（北京）国际医学科技研究院"
+            VALUE "FileDescription", "中食药嘉和eGMP-DMS数据管理系统"
+            VALUE "FileVersion", "0, 0, 0, 0"
+            VALUE "InternalName", "DmsTestDlg.exe"
+            VALUE "LegalCopyright", "嘉和天下（北京）国际医学科技研究院。保留所有权利。"
+            VALUE "OriginalFilename", "DmsTestDlg.exe"
+            VALUE "ProductName", "中食药嘉和eGMP-DMS数据管理系统"
+            VALUE "ProductVersion", "0, 0, 0, 0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 936
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 241
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 89
+    END
+
+    IDD_DMSTESTDLG_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 344
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 375
+    END
+
+    IDD_SELECT_TIME_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 266
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 256
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "关于 DmsTestDlg(&A)..."
+END
+
+#endif    // 中文(中华人民共和国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE 4, 2
+#pragma code_page(936)
+#include "res\DmsTestDlg.rc2"  // 非 Microsoft Visual C++ 编辑的资源
+#include "afxres.rc"     // 标准组件
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

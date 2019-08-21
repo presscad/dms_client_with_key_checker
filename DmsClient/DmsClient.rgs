@@ -1,0 +1,11 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		'%APPID%' = s 'DmsClient'
+		'DmsClient.EXE'
+		{
+			val AppID = s '%APPID%'
+		}
+	}
+}

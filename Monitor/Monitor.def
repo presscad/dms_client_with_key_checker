@@ -1,0 +1,20 @@
+; Monitor.def : 声明 DLL 的模块参数。
+
+LIBRARY      "Monitor"
+
+EXPORTS
+    ; 此处可以是显式导出
+    
+   
+    startMonitorFile    @1
+	stopMonitorFile		@2
+	sGetMonitoringParam	@3
+	sSetMonitoringParam	@4
+	sConnectServer		@5
+	setCListBox			@6
+	sCloseUniverDB		@7
+	sGetLicInfo			@8
+	sCheckLicence		@9
+	setAutoCopyDB          @10
+	ScanningLogFile		   @11
+	 
