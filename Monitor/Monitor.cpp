@@ -2,14 +2,11 @@
 //
 
 #include "stdafx.h"
-//#include <afxdllx.h>
 #include "Support.h"
-//#include "ClientSocket.h"
 #include ".\zip\ZipImplement.h"
 #include <math.h>
 #include <shlwapi.h>
 #include <algorithm>
-#include "monitor.h"
 #include "..\SuperDb\fun.h"
 #include "..\SuperDb\Encrypts.h"
 #include "..\SuperDb\UniverDB.h"
@@ -22,6 +19,12 @@
 #include <map>
 #include"tlhelp32.h"
 
+//#include <afxdllx.h>
+//#include "ClientSocket.h"
+
+#pragma comment(lib, "SuperDB.lib");
+
+#include "monitor.h"
 
 #ifdef _MANAGED
 #error 请阅读 Monitor.cpp 中的说明以使用 /clr 进行编译
@@ -72,12 +75,11 @@ int s_licensedDays = 0;
 CString s_defaultSql = "";
 
 //static HANDLE thread_exit = CreateEvent(NULL, TRUE, FALSE, NULL); // 原子量，用于控制线程结束  
-
 //std::map<CString,CFileDirMonitor*>    s_mapFileDirMonitor;
-
 //std::vector<CString>    s_vecFileLogInfo;
-std::vector<CString>    s_vecTimeLogInfo;
 //CClientSocket s_ClientSocket;
+
+std::vector<CString>    s_vecTimeLogInfo;
 CString s_strCurExePath;
 int s_nSynchroFrequency = 10;//Synchro frequency
 static CUniverDB   s_SuperDB;
@@ -90,7 +92,6 @@ static CUniverDB   s_MonSuperDB;
 Mutex g_MonFileLogLock; 
 
 //Mutex g_DelDBLock; 
-
 //std::map<CString,CString> s_mapFileLogs;
 
 CStringArray s_arrSendFileLogs;
@@ -210,7 +211,6 @@ DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved)
     
 #define MSGSIZE        1025         //收发缓冲区的大小      
 
-
 DWORD WINAPI ThreadProcSendOldFileLog(LPVOID lpParam)  
 { 
 	Sleep(500);
@@ -265,7 +265,6 @@ void setCListBox (CListBox& listInfo){
 void setAutoCopyDB(BOOL isAuto){
 	CStatFileLogs::s_isAutoCopyDB = isAuto;
 }
-
 
 DWORD WINAPI ThreadProcOnTime(LPVOID lpParam){
 	//COleDateTime time = COleDateTime::get
@@ -432,8 +431,6 @@ DWORD WINAPI ThreadProcOnTimeHeartbeat(LPVOID lpParam){
 	return 0;
 } 
 
-
-
 void sDebugInfo(RECEIVE_INFO& receInfo){
 	TRACE("%d:\t%s\n",receInfo.type,receInfo.info);
 }
@@ -522,7 +519,6 @@ void sAddStringListInfo(RECEIVE_INFO& receInfo){
 	//	s_pListInfo->AddString(sTemp);
 	//}
 }
-
 
 void sSendFileToServer(RECEIVE_INFO& receInfo){
 	CString sTemp;
@@ -639,7 +635,6 @@ void ReceDelFileLogSql(RECEIVE_INFO& receInfo){
 	//}
 }
 
-
 void sHeartbeatAndSynchroFrequency(RECEIVE_INFO& receInfo){
 
 	if (s_isConnect)
@@ -726,7 +721,6 @@ void sFileFliter28(RECEIVE_INFO& receInfo){
 	}
 }
 
-
 void sFileFliter30(RECEIVE_INFO& receInfo){
 
 	char info[2];
@@ -756,7 +750,6 @@ void sFileFliter30(RECEIVE_INFO& receInfo){
 
 }
 
-
 //
 void sFileFliter29(RECEIVE_INFO& receInfo){
 	CString sTemp;
@@ -771,7 +764,6 @@ void sFileFliter29(RECEIVE_INFO& receInfo){
 		}
 	}
 }
-
 
 void sSetRoomId(RECEIVE_INFO& receInfo){
 
@@ -1028,11 +1020,6 @@ DWORD WINAPI ThreadProcSendFile(LPVOID lpParam){
 	return 1;
 }
 
-
-
-
-
-
 //
 //DWORD WINAPI ThreadProcFileRead(LPVOID lpParam)  
 //{ 
@@ -1081,9 +1068,6 @@ DWORD WINAPI ThreadProcSendFile(LPVOID lpParam){
 //
 //	return 1;
 //}
-
-
-
 
 BOOL stopMonitorFile(){
 	shutdown(s_Client,SD_BOTH);
@@ -1561,11 +1545,6 @@ DWORD WINAPI ThreadScanningLogFile2(LPVOID lpParam)
 	}
 	return 1;
 }
-
-
-
-
-
 
 ///////////////////////////////////////////////////////////////////////////// 
 // 函数说明: 遍历文件夹 
@@ -2304,8 +2283,6 @@ CString sGetCurrentUserName()
 	return strUserName;
 }
 
-
- 
 DWORD WINAPI ThreadProcServer(LPVOID lpParam)  
 {  
 	const int BUF_SIZE = 64;  
@@ -2396,7 +2373,6 @@ DWORD WINAPI ThreadProcServer(LPVOID lpParam)
 	return 0;  
 }
 
-
 void SendOldZipFile(){
 
 	if(!s_isConnect){
@@ -2414,167 +2390,9 @@ void SendOldZipFile(){
 
 }
 
-//--------------------------------------------------------------
-//						主板序列号 -- 获取不到时为 None
-//--------------------------------------------------------------
-BOOL GetBaseBoardByCmd(char *lpszBaseBoard, int len/*=128*/)
-{	
-	const long MAX_COMMAND_SIZE = 10000; // 命令行输出缓冲大小	
-	CHAR szFetCmd[]			= "wmic BaseBoard get SerialNumber"; // 获取主板序列号命令行	
-	const string strEnSearch = "SerialNumber"; // 主板序列号的前导信息
-
-	BOOL   bret		  = FALSE;
-	HANDLE hReadPipe  = NULL; //读取管道
-	HANDLE hWritePipe = NULL; //写入管道	
-	PROCESS_INFORMATION pi;   //进程信息	
-	STARTUPINFO			si;	  //控制命令行窗口信息
-	SECURITY_ATTRIBUTES sa;   //安全属性
-
-	char			szBuffer[MAX_COMMAND_SIZE+1] = {0}; // 放置命令行结果的输出缓冲区
-	string			strBuffer;
-	unsigned long	count = 0;
-	long			ipos  = 0;
-
-	memset(&pi, 0, sizeof(pi));
-	memset(&si, 0, sizeof(si));
-	memset(&sa, 0, sizeof(sa));
-
-	pi.hProcess = NULL;
-	pi.hThread  = NULL;
-	si.cb		= sizeof(STARTUPINFO);
-	sa.nLength	= sizeof(SECURITY_ATTRIBUTES);
-	sa.lpSecurityDescriptor = NULL;
-	sa.bInheritHandle		= TRUE;
-
-	//1.0 创建管道
-	bret = CreatePipe(&hReadPipe, &hWritePipe, &sa, 0);
-	if(!bret)
-	{
-		goto END;
-	}
-
-	//2.0 设置命令行窗口的信息为指定的读写管道
-	GetStartupInfo(&si);
-	si.hStdError	= hWritePipe;
-	si.hStdOutput	= hWritePipe;
-	si.wShowWindow	= SW_HIDE; //隐藏命令行窗口
-	si.dwFlags		= STARTF_USESHOWWINDOW | STARTF_USESTDHANDLES;
-
-	//3.0 创建获取命令行的进程
-	bret = CreateProcess(NULL, szFetCmd, NULL, NULL, TRUE, 0, NULL, NULL, &si, &pi );
-	if(!bret)
-	{
-		goto END;
-	}	
-
-	//4.0 读取返回的数据
-	WaitForSingleObject (pi.hProcess, 500/*INFINITE*/);
-	bret  =  ReadFile(hReadPipe,  szBuffer,  MAX_COMMAND_SIZE,  &count,  0);
-	if(!bret)
-	{
-		goto END;
-	}
-
-	//5.0 查找主板序列号
-	bret = FALSE;
-	strBuffer = szBuffer;
-	ipos = strBuffer.find(strEnSearch);
-
-	if (ipos < 0) // 没有找到
-	{		
-		goto END;
-	}
-	else
-	{
-		strBuffer = strBuffer.substr(ipos+strEnSearch.length());
-	}	
-
-	memset(szBuffer, 0x00, sizeof(szBuffer));
-	strcpy_s(szBuffer, strBuffer.c_str());
-
-	//去掉中间的空格 \r \n
-	int j = 0;
-	for (int i = 0; i < strlen(szBuffer); i++)
-	{
-		if (szBuffer[i] != ' ' && szBuffer[i] != '\n' && szBuffer[i] != '\r')
-		{
-			lpszBaseBoard[j] = szBuffer[i];
-			j++;
-		}
-	}
-
-	lpszBaseBoard[j] = '\0';
-
-	bret = TRUE;
-
-END:
-	//关闭所有的句柄
-	CloseHandle(hWritePipe);
-	CloseHandle(hReadPipe);
-	CloseHandle(pi.hProcess);
-	CloseHandle(pi.hThread);
-
-	return(bret);
-}
-
-
-CString GetCPUID()
-{
-	CString CPUID;
-	unsigned long s1,s2;
-	unsigned char vendor_id[]="------------";
-	char sel;
-	sel='1';
-	CString VernderID;
-	CString MyCpuID,CPUID1,CPUID2;
-	switch(sel)
-	{
-	case '1':
-		__asm{
-			xor eax,eax      //eax=0:取Vendor信息
-				cpuid    //取cpu id指令，可在Ring3级使用
-				mov dword ptr vendor_id,ebx
-				mov dword ptr vendor_id[+4],edx
-				mov dword ptr vendor_id[+8],ecx
-		}
-		VernderID.Format("%s-",vendor_id);
-		__asm{
-			mov eax,01h   //eax=1:取CPU序列号
-				xor edx,edx
-				cpuid
-				mov s1,edx
-				mov s2,eax
-		}
-		CPUID1.Format("%08X%08X",s1,s2);
-		__asm{
-			mov eax,03h
-				xor ecx,ecx
-				xor edx,edx
-				cpuid
-				mov s1,edx
-				mov s2,ecx
-		}
-		CPUID2.Format("%08X%08X",s1,s2);
-		break;
-	case '2':
-		{
-			__asm{
-				mov ecx,119h
-					rdmsr
-					or eax,00200000h
-					wrmsr
-			}
-		}
-		//AfxMessageBox("CPU id is disabled.");
-		break;
-	}
-	MyCpuID = CPUID1;//+CPUID2;
-	CPUID = MyCpuID;
-	return CPUID;
-}
-
 int sCheckLicence(char& licType){
-	return  CEncrypts::CheckLicence("DmsClien",licType);
+	CEncrypts enc;
+	return  enc.CheckLicence("DmsClien",licType);
 }
 
 // 打开服务器许可
@@ -2587,7 +2405,7 @@ BOOL sOpenServerLicense()
 	}
 
 	char licType;
-	if (CEncrypts::CheckLicence("DmsClien",licType) == 0)
+	if (enc.CheckLicence("DmsClien",licType) == 0)
 	{
 		return FALSE;
 	}
@@ -2663,11 +2481,14 @@ void sGetLicInfo()
 		fwrite(strText, 1, strText.GetLength(), fp);
 	}
 
-	strText = "MotherboardSN = " + s_strBaseBoard;
-	fwrite(strText, 1, strText.GetLength(), fp);
+	//strText = "MotherboardSN = " + s_strBaseBoard;
+	//fwrite(strText, 1, strText.GetLength(), fp);
 
 	strText = "\r\nCPUSerial = " + s_strCPUID;
 	fwrite(strText, 1, strText.GetLength(), fp);
+
+	//strText = "\r\nVersion = 3";
+	//fwrite(strText, 1, strText.GetLength(), fp);
 
 	fclose(fp);
 

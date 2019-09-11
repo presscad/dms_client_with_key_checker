@@ -36,6 +36,8 @@ public:
 public:
 	afx_msg void OnBnClickedButton2();
 	int CheckLicLicence();
+public:
+	afx_msg void OnBnClickedOk();
 };
 
 CAboutDlg::CAboutDlg() : CDialog(CAboutDlg::IDD)
@@ -51,6 +53,7 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON1, &CAboutDlg::OnBnClickedButton1)
 	ON_BN_CLICKED(IDC_BUTTON2, &CAboutDlg::OnBnClickedButton2)
+	ON_BN_CLICKED(IDOK, &CAboutDlg::OnBnClickedOk)
 END_MESSAGE_MAP()
 
 
@@ -628,33 +631,35 @@ void CAboutDlg::OnBnClickedButton2()
 		}
 	}
 
-
-
 	AfxMessageBox("许可文件成功，下一次启动软件生效。");
 
 }
 
 BOOL CAboutDlg::OnInitDialog()
 {
+	char chType;
+	CString str;
+	int nResult = 0;
 	CDialog::OnInitDialog();
 
 	// 取许可信息
-	CString str;
-	char chType;
-	int nResult = sCheckLicence(chType);
-	if (nResult == 1) // 狗
-		str = "软件许可:  软件狗许可。";
-	else if (nResult == 2) // 网卡
+	nResult = sCheckLicence(chType);
+	if (chType == 2) // 网卡
 		str = "软件许可:  永久许可。";
-	else if (nResult == 4) // 网络
-		str = "软件许可:  网络许可。";
-	else if (nResult >= 10) // 日期
-		if(chType == 3)
-			str.Format("软件许可:  距软件过期还有%d 天。", nResult - 10 + 1);
+	else if (nResult >= 1) // 日期
+		if (chType == 3)
+			str.Format("软件许可:  距软件过期还有%d 天。", nResult);
 		else
-			str.Format("软件许可:  本机专用,距软件过期还有%d 天。", nResult - 10 + 1);
+			str.Format("软件许可:  本机专用,距软件过期还有%d 天。", nResult);
 	else // 无效
 		str = "软件许可:  非法许可。";
+
+
+	//if (nResult == 1) // 狗
+	//	str = "软件许可:  软件狗许可。";
+	//else if (nResult == 4) // 网络
+	//	str = "软件许可:  网络许可。";
+
 
 	// 设置许可信息
 	m_staLicence.SetWindowText(str);
@@ -713,4 +718,10 @@ void CDmsTestDlgDlg::OnBnClickedButton6()
 	//str = dlg.GetPathName();
 	//m_editFlagFile.SetWindowText(str);
 
+}
+
+void CAboutDlg::OnBnClickedOk()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	OnOK();
 }

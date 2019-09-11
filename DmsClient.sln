@@ -1,27 +1,23 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DmsClient", "DmsClient\DmsClient.vcproj", "{66106DB0-B31C-4091-8265-5E61E02C5FBA}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DmsClient", "DmsClient\DmsClient.vcxproj", "{66106DB0-B31C-4091-8265-5E61E02C5FBA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DmsClientPS", "DmsClient\DmsClientPS.vcproj", "{6FCFF8AC-CB9F-4F09-B087-EC87C73C5DF6}"
-	ProjectSection(ProjectDependencies) = postProject
-		{66106DB0-B31C-4091-8265-5E61E02C5FBA} = {66106DB0-B31C-4091-8265-5E61E02C5FBA}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DmsClientPS", "DmsClient\DmsClientPS.vcxproj", "{6FCFF8AC-CB9F-4F09-B087-EC87C73C5DF6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Monitor", "Monitor\Monitor.vcproj", "{23BDAF4F-7530-461D-92DC-31D363BB52C4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Monitor", "Monitor\Monitor.vcxproj", "{23BDAF4F-7530-461D-92DC-31D363BB52C4}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DmsTestDlg", "DmsTestDlg\DmsTestDlg.vcproj", "{C85690EE-25FF-499D-A465-A994E655B6BA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DmsTestDlg", "DmsTestDlg\DmsTestDlg.vcxproj", "{C85690EE-25FF-499D-A465-A994E655B6BA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DMSstart", "DMSstart\DMSstart.vcproj", "{A0C0A0B7-65DA-4E85-87DE-2473CF54025C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DMSstart", "DMSstart\DMSstart.vcxproj", "{A0C0A0B7-65DA-4E85-87DE-2473CF54025C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DMSstartPS", "DMSstart\DMSstartPS.vcproj", "{B3DC8756-0C7E-42C7-B069-8577938163D0}"
-	ProjectSection(ProjectDependencies) = postProject
-		{A0C0A0B7-65DA-4E85-87DE-2473CF54025C} = {A0C0A0B7-65DA-4E85-87DE-2473CF54025C}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DMSstartPS", "DMSstart\DMSstartPS.vcxproj", "{B3DC8756-0C7E-42C7-B069-8577938163D0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BaseDB", "BaseDB\BaseDB.vcproj", "{5A7B630B-1FF5-4CAC-A5F7-47A3308528CA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BaseDB", "BaseDB\BaseDB.vcxproj", "{5A7B630B-1FF5-4CAC-A5F7-47A3308528CA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "26 SuperDb", "SuperDb\SuperDb.vcproj", "{0D6A1435-4B77-44DF-A8FC-5EC99F9ACAAC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "26 SuperDb", "SuperDb\SuperDb.vcxproj", "{0D6A1435-4B77-44DF-A8FC-5EC99F9ACAAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

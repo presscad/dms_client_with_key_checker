@@ -19,6 +19,7 @@ void ReceDelFileLogSql(RECEIVE_INFO& receInfo);
 void sHeartbeatAndSynchroFrequency(RECEIVE_INFO& receInfo);
 void sHeartbeat(RECEIVE_INFO& receInfo);
 void sRenewalLicense(RECEIVE_INFO& receInfo);
+void sRenewalLicense(RECEIVE_INFO& receInfo);
 void sSendLinInfo(RECEIVE_INFO& receInfo);
 void sFileFliter28(RECEIVE_INFO& receInfo);
 void sFileFliter30(RECEIVE_INFO& receInfo);
@@ -26,7 +27,6 @@ void sFileFliter29(RECEIVE_INFO& receInfo);
 void sSetRoomId(RECEIVE_INFO& receInfo);
 void sSendFileToServer(RECEIVE_INFO& receInfo);
 void sAddStringListInfo(RECEIVE_INFO& receInfo);
-void sRenewalLicense(RECEIVE_INFO& receInfo);
 void sSetAutoConnect(RECEIVE_INFO& receInfo);
 
 
@@ -64,8 +64,8 @@ BOOL stopMonitorFile();
 // 打开服务器许可
 BOOL sOpenServerLicense();
 int sCheckLicence(char& licType);
-CString GetCPUID();
-BOOL GetBaseBoardByCmd(char *lpszBaseBoard, int len/*=128*/);
+//BOOL GetBaseBoardByCmd(char *lpszBaseBoard, int len/*=128*/);
+//CString GetCPUID();
 CString sGetLinInfo();
 
 int sGetFileLogM();
