@@ -117,7 +117,7 @@ int _tmain(int argc, TCHAR* argv[], TCHAR* envp[])
 
 	ifstream infile(vm["in"].as<string>(), ios_base::in | ios_base::binary);
 	ostringstream sbuf; sbuf << infile.rdbuf();
-	sbuf << "LICENSEID=" + to_string(vm["id"].as<int>()) + '\n';
+	sbuf << "\nLICENSEID=" + to_string(vm["id"].as<int>()) + '\n';
 	sbuf << "LICENSETYPE=" + to_string(vm["type"].as<int>()) + '\n';
 	sbuf << "PRINTCLIENTCOUNT=" + to_string(vm["clicnt"].as<int>()) + '\n';
 	sbuf << "USERCOUNT=" + to_string(vm["usrcnt"].as<int>()) + '\n';

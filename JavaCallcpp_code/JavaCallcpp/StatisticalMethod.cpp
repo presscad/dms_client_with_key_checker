@@ -14,16 +14,13 @@
 #include <openssl/des.h>
 #include <openssl/pem.h>
 #include <openssl/err.h>
+#include <process.h>
 using namespace std;
 
 #ifdef _WIN64
-#ifdef _DEBUG
-#pragma comment(lib, "libcryptoMDd.lib")
+#pragma comment(lib, "crypto/lib64/libcryptoMD.lib")
 #else
-#pragma comment(lib, "libcryptoMD.lib")
-#endif // DEBUG
-#else
-#pragma comment(lib, "libcrypto.lib")
+#pragma comment(lib, "crypto/lib/libcryptoMD.lib")
 #endif
 
 
@@ -92,7 +89,7 @@ vector<double> preCheckError(vector<CQdrsPrdctData*> list, double results[], int
 
 	results[2] = Round(sum / (double)list.size(), calculationAccuracy);
 
-	//Collections.sort(dataList);
+	//Collections.sort(dataList);dddddd
 	results[0] = dataList[dataList.size() - 1];
 	results[1] = dataList[0];
 
@@ -946,7 +943,7 @@ BOOL GetBaseBoardByCmd(char *lpszBaseBoard, int len/*=128*/)
 	}
 
 	//2.0 设置命令行窗口的信息为指定的读写管道
-	GetStartupInfoA(&si);
+	//GetStartupInfoA(&si);
 	si.hStdError = hWritePipe;
 	si.hStdOutput = hWritePipe;
 	si.wShowWindow = SW_HIDE; //隐藏命令行窗口
@@ -1050,10 +1047,13 @@ string GetCPUID()
 //--------------------------------------------------------------
 //						MACADDR 获取不到时为 None
 //--------------------------------------------------------------
-BOOL GetMacAddrByCmd(char *lpszBaseBoard, int len)
+unsigned __stdcall GetMacAddrByCmd(void *pBaseBoard)
 {
-	const long MAX_COMMAND_SIZE = 10000; // 命令行输出缓冲大小	
+	const long MAX_COMMAND_SIZE = 1000; // 命令行输出缓冲大小	
 	CHAR szFetCmd[] = "getmac /NH"; // mac	
+	//CHAR szFetCmd[] = "notepad.exe"; // mac	
+
+	char* lpszBaseBoard = (char*)pBaseBoard;
 
 	BOOL   bret = FALSE;
 	HANDLE hReadPipe = NULL; //读取管道
@@ -1086,15 +1086,18 @@ BOOL GetMacAddrByCmd(char *lpszBaseBoard, int len)
 		goto END;
 	}
 
+
 	//2.0 设置命令行窗口的信息为指定的读写管道
-	GetStartupInfoA(&si);
+	//GetStartupInfoA(&si);
 	si.hStdError = hWritePipe;
 	si.hStdOutput = hWritePipe;
 	si.wShowWindow = SW_HIDE; //隐藏命令行窗口
 	si.dwFlags = STARTF_USESHOWWINDOW | STARTF_USESTDHANDLES;
 
 	//3.0 创建获取命令行的进程
-	bret = CreateProcessA(NULL, szFetCmd, NULL, NULL, TRUE, 0, NULL, NULL, &si, &pi);
+	bret = CreateProcessA(NULL, szFetCmd, NULL, NULL, TRUE, 
+		CREATE_NEW_CONSOLE | CREATE_BREAKAWAY_FROM_JOB | CREATE_DEFAULT_ERROR_MODE | CREATE_NEW_PROCESS_GROUP,
+		NULL, NULL, &si, &pi);
 	if (!bret)
 	{
 		goto END;
@@ -1102,6 +1105,8 @@ BOOL GetMacAddrByCmd(char *lpszBaseBoard, int len)
 
 	//4.0 读取返回的数据
 	WaitForSingleObject(pi.hProcess, INFINITE);
+
+
 	bret = ReadFile(hReadPipe, szBuffer, MAX_COMMAND_SIZE, &count, 0);
 	if (!bret)
 	{
@@ -1149,6 +1154,7 @@ BOOL GetMacAddrByCmd(char *lpszBaseBoard, int len)
 
 	lpszBaseBoard[j] = '\0';
 
+
 	bret = TRUE;
 
 END:
@@ -1158,12 +1164,18 @@ END:
 	CloseHandle(pi.hProcess);
 	CloseHandle(pi.hThread);
 
+	//_endthreadex(0);
+
 	return(bret);
 }
 
 void GetMacAddress(string& arrAddress){
+
 	char addrs[1000];
-	int ret = GetMacAddrByCmd(addrs, 1000);
+	unsigned int threadID;
+	HANDLE	hThread = (HANDLE)_beginthreadex(NULL, 0, &GetMacAddrByCmd, addrs, 0, &threadID);
+	WaitForSingleObject(hThread, INFINITE);
+	CloseHandle(hThread);
 	arrAddress = addrs;
 }
 
@@ -1182,8 +1194,21 @@ string sGetLinInfo(){
 	return strResult;
 }
 
+int GetLinInfo(char* info)
+{
+	string rea = sGetLinInfo();
+	const char* rec = rea.c_str();
+	int len = strlen(rec);
+	for (int i = 0; i < len; i++)
+	{
+		info[i] = rec[i];
+	}
+	info[len] = '\0';
+	return true;
+}
 
-bool readLic(const char* licFileName) {//, const char* datFile
+
+int readLic(const char* licFileName) {//, const char* datFile
 	bool ret = 0; time_t expired = 0;
 	string str = licFileName; 	str += "lic/pubkey.pem";
 	string strsa = getRSAKey(str);
@@ -1310,7 +1335,7 @@ bool readLic(const char* licFileName) {//, const char* datFile
 
 int check() {
 	if (L_Staticstaial_type == 2) return L_Staticstaial_type;
-	else L_Staticstical_expried;
+	else return L_Staticstical_expried;
 }
 
 int checked(int nResults[]) {

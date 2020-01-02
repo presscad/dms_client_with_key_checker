@@ -15,7 +15,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	bool bConst = true;
 	bool ret = getTrendLine(dVals, R, datas, count, nSolution, bConst);
 
-	readLic("D:\\SDK\\apache-tomcat-8.5.23\\webapps\\dms\\");
+	readLic("E:\\WorkSpace\\fileProtector\\srv\\dist\\");
 
 	int  nRet[3];
 	int date = checked(nRet);

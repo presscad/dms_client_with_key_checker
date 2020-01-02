@@ -36,11 +36,13 @@ extern "C"
 
 	extern TESTJNI_API bool getTrendLine(double dVals[], double R[], double datas[], int count, int nSolution, bool bConst);
 
-	extern TESTJNI_API bool readLic(const char* licFileName);//, const char* datFile
+	extern TESTJNI_API int readLic(const char* licFileName);//, const char* datFile
 
 	extern TESTJNI_API int check();
 
 	extern TESTJNI_API int checked(int nResults[]);
+
+	extern TESTJNI_API int GetLinInfo(char* info);
 
 #ifdef __cplusplus
 }
